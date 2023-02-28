@@ -29,12 +29,12 @@ app.get('/users', async (req, res) => {
   }
 })
 
-app.get('/checkuserexists', async (req, res) => {
+app.get('/checkuserexists/:username', async (req, res) => {
   try {
     const users = JSON.parse(fs.readFileSync('/Users/abhilashgaddam/Documents/Node.js-Users-api/server/users.json', 'utf8'));
-    const newUser = { username: req.body.username };
+    const newUser = { username: req.params.username };
     const isUserAlreadyExists = users.find(user => user.username == newUser.username) !== undefined;
-    res.send({message: isUserAlreadyExists ? 'user already exists' : 'user doesn\'t exists'});    
+    res.send({message: isUserAlreadyExists ? 'user already exists' : 'user doesn\'t exist'});    
   }
   catch (e) {
     res.status(500).send(e);
